@@ -1,6 +1,6 @@
 [uwsgi]
 module=kiki.wsgi:application
-http = 0.0.0.0:5000
+http=0.0.0.0:5000
 master=True
 pidfile=<%= @home_dir %>project-master.pid
 vacuum=True
@@ -9,8 +9,8 @@ daemonize=<%= @home_dir %>kiki.log
 process = 2
 enable-threads = False
 threads = 0
-virtualenv = <%= @home_dir %>/Envs/kiki
+virtualenv = <%= @home_dir %>venvs/test
 route = /static/ addheader:Access-Control-Allow-Origin: *
-static-map=/static=<%= @home_dir %>vendor/bower_components
+static-map=/static=<%= @home_dir %>kiki/vendor/bower_components
 
 
