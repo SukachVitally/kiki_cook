@@ -63,9 +63,26 @@ execute 'db migrate' do
  command "#{pyinter} #{node[:home_dir]}kiki/manage.py migrate"
 end
 
-#execute 'bower install' do
-# command "#{pyinter} #{node[:home_dir]}kiki/manage.py bower_install"
-#end
+
+package 'epel-release'
+package 'nodejs'
+package 'npm'
+
+execute 'install bower' do
+ command "npm install bower -g"
+end
+
+directory "#{node[:home_dir]}kiki/vendor" do
+    owner 'test'
+    group 'test-users'
+    mode '0777'
+    action :create
+end
+
+execute 'bower django install' do
+ command "#{pyinter} #{node[:home_dir]}kiki/manage.py bower_install"
+ user 'test'
+end
 
 execute 'start uwsgi' do
  command "uwsgi #{node[:home_dir]}uwsgi.ini"
