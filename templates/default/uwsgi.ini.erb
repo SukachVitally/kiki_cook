@@ -1,0 +1,16 @@
+[uwsgi]
+module=kiki.wsgi:application
+http = 0.0.0.0:5000
+master=True
+pidfile=<%= @home_dir %>project-master.pid
+vacuum=True
+max-requests=5000
+daemonize=<%= @home_dir %>kiki.log
+process = 2
+enable-threads = False
+threads = 0
+virtualenv = <%= @home_dir %>/Envs/kiki
+route = /static/ addheader:Access-Control-Allow-Origin: *
+static-map=/static=<%= @home_dir %>vendor/bower_components
+
+
