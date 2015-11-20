@@ -50,7 +50,7 @@ python_pip "git+https://github.com/SukachVitally/kiki.git" do
   virtualenv "#{node[:home_dir]}venvs/test"
 end
 
-template "#{node[:home_dir]}uwsgi.ini" do
+template "#{node[:home_dir]}/kiki/uwsgi.ini" do
     source 'uwsgi.ini.erb'
     mode '0755'
     variables(
@@ -86,7 +86,7 @@ execute 'bower django install' do
 end
 
 execute 'start uwsgi' do
- command "uwsgi #{node[:home_dir]}uwsgi.ini"
+ command "uwsgi #{node[:home_dir]}/kiki/uwsgi.ini"
 end
 
 
